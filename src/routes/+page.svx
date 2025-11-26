@@ -1,0 +1,115 @@
+<script lang="ts">
+        import CodePanel from '$lib/components/CodePanel.svelte';
+        import ContentGrid from '$lib/components/ContentGrid.svelte';
+        import DemoCard from '$lib/components/DemoCard.svelte';
+        import FormDemo from '$lib/components/FormDemo.svelte';
+        import StepList from '$lib/components/StepList.svelte';
+
+        const features = [
+                {
+                        title: 'Markdown と Svelte をひとつに',
+                        description: 'mdsvex なら Markdown の記法で文章を書きつつ、任意の Svelte コンポーネントを差し込めます。コンテンツと UI の距離が縮まり、ドキュメントからそのままデモを操作できるページを作成できます。',
+                        accent: 'mdsvex'
+                },
+                {
+                        title: 'superforms-web を意識したライブプレビュー',
+                        description:
+                                'CiscoHeat 氏の superforms-web のように、バリデーション済みフォームや UI カードをそのままブラウザで試せるレイアウトを再現。学習者が「触れる資料」を体験できます。',
+                        accent: 'Demo'
+                },
+                {
+                        title: 'SvelteKit / Vite ベース',
+                        description: '標準的な SvelteKit プロジェクトなので、GitHub Pages から各種ホスティングまでデプロイ先を選びません。ルーティングや高速 HMR もそのまま利用できます。',
+                        accent: 'Kit'
+                }
+        ];
+
+        const steps = [
+                {
+                        title: 'MDX 風の .svx ページを作成',
+                        detail: 'Markdown の見出しや段落の中に Svelte コンポーネントを埋め込み、ライティングと実装を同時に進めます。'
+                },
+                {
+                        title: 'デモ用コンポーネントを配置',
+                        detail: 'フォーム、カード、ステップ表示など、複数の UI パーツを独立した Svelte コンポーネントとして整理。再利用性を確保しつつ mdsvex から呼び出します。'
+                },
+                {
+                        title: 'Vite / SvelteKit でデプロイ',
+                        detail: 'pnpm build だけで静的出力が完成。サーバーを立てなくてもシンプルに公開でき、mdsvex の構成をそのまま持ち込めます。'
+                }
+        ];
+
+        const snippet = `<script lang=\"ts\">\n  import FormDemo from '$lib/components/FormDemo.svelte';\n<\/script>\n\n## Markdown にコンポーネントを埋め込む\n<FormDemo />`;
+</script>
+
+<svelte:head>
+        <title>mdsvex で書く Svelte コンポーネントデモ</title>
+        <meta name="description" content="mdsvex を使って superforms-web のように Svelte コンポーネントを直接デモできるページを用意しました。" />
+</svelte:head>
+
+<section class="mx-auto flex max-w-6xl flex-col gap-12 px-6 py-16">
+        <div class="space-y-6 rounded-3xl border border-white/10 bg-black/30 p-10 shadow-2xl shadow-sky-500/10">
+                <p class="text-xs font-semibold uppercase tracking-[0.3em] text-sky-200">mdsvex inspired by superforms-web</p>
+                <div class="space-y-4">
+                        <h1 class="text-4xl font-bold leading-tight text-white md:text-5xl">
+                                Markdown の流れで Svelte コンポーネントをデモ
+                        </h1>
+                        <p class="max-w-3xl text-lg leading-relaxed text-white/80">
+                                <a class="text-sky-300 underline decoration-sky-300/40" href="https://github.com/ciscoheat/superforms-web" target="_blank" rel="noreferrer">
+                                        superforms-web
+                                </a>
+                                に触発されたレイアウトサンプルです。mdsvex で書いた記事からインタラクティブなコンポーネントを直接呼び出し、ドキュメントとデモをひとつの画面にまとめます。
+                        </p>
+                        <div class="flex flex-wrap gap-3 text-sm text-white/70">
+                                <span class="rounded-full border border-white/10 bg-white/5 px-4 py-2">SvelteKit + mdsvex</span>
+                                <span class="rounded-full border border-white/10 bg-white/5 px-4 py-2">ライブフォーム</span>
+                                <span class="rounded-full border border-white/10 bg-white/5 px-4 py-2">ドキュメント主導の UI</span>
+                        </div>
+                </div>
+        </div>
+
+        <div class="space-y-8">
+                <h2 class="text-2xl font-semibold text-white">mdsvex で実現するハイブリッドな記事</h2>
+                <ContentGrid items={features} />
+        </div>
+
+        <div class="grid gap-6 lg:grid-cols-2">
+                <DemoCard title="フォームバリデーションのライブデモ" description="superforms のモダンな UX を意識した、クライアント側での簡易バリデーションフォームです。">
+                        <FormDemo />
+                </DemoCard>
+
+                <DemoCard eyebrow="Markdown + UI" title="記事にそのまま差し込む" description="mdsvex では Markdown に Svelte コンポーネントを挿入できます。コード例も Markdown のまま。">
+                        <CodePanel code={snippet} label="mdsvex page" />
+                </DemoCard>
+        </div>
+
+        <div class="rounded-3xl border border-white/10 bg-white/5 p-8 shadow-xl shadow-black/20">
+                <div class="flex flex-wrap items-center justify-between gap-4">
+                        <div>
+                                <p class="text-xs font-semibold uppercase tracking-[0.3em] text-sky-200">how it works</p>
+                                <h2 class="text-2xl font-semibold text-white">コンテンツからデプロイまでの流れ</h2>
+                        </div>
+                        <a
+                                class="rounded-lg border border-white/10 bg-white/10 px-4 py-2 text-sm font-semibold text-white transition hover:border-sky-300 hover:text-sky-100"
+                                href="https://mdsvex.com/docs"
+                                target="_blank"
+                                rel="noreferrer"
+                        >
+                                mdsvex ドキュメントを見る
+                        </a>
+                </div>
+                <div class="mt-6">
+                        <StepList steps={steps} />
+                </div>
+        </div>
+
+        <div class="flex flex-col items-center gap-3 text-sm text-white/70">
+                <p>このページ自体が mdsvex (.svx) ファイルで構成されており、Svelte コンポーネントを好きな場所に配置できます。</p>
+                <a
+                        class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-sky-200 transition hover:border-sky-300 hover:text-white"
+                        href="/modal"
+                >
+                        モーダルのデモページを見る →
+                </a>
+        </div>
+</section>

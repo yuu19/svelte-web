@@ -1,0 +1,44 @@
+<script lang="ts">
+        import CodePanel from '$lib/components/CodePanel.svelte';
+        import DemoCard from '$lib/components/DemoCard.svelte';
+        import ModalDemo from '$lib/components/ModalDemo.svelte';
+
+        const snippet = `<script lang=\"ts\">\n  import ModalDemo from '$lib/components/ModalDemo.svelte';\n<\/script>\n\n## モーダルデモ\n<ModalDemo />`;
+</script>
+
+<svelte:head>
+        <title>モーダルのデモ | mdsvex + Svelte 5</title>
+        <meta name="description" content="Svelte 5 の runes 構文で作ったモーダルコンポーネントを mdsvex から呼び出すデモです。" />
+</svelte:head>
+
+<section class="mx-auto flex max-w-6xl flex-col gap-12 px-6 py-16">
+        <div class="space-y-4">
+                <p class="text-xs font-semibold uppercase tracking-[0.3em] text-sky-200">modal showcase</p>
+                <h1 class="text-4xl font-bold leading-tight text-white md:text-5xl">モーダルの挙動を mdsvex で試す</h1>
+                <p class="max-w-3xl text-lg leading-relaxed text-white/80">
+                        クリックで開閉し、ESC キーで閉じられるモーダルを Svelte 5 の runes で実装。記事中に埋め込んでそのまま
+                        触れる UI を用意しました。
+                </p>
+                <div class="flex flex-wrap gap-3 text-sm text-white/70">
+                        <span class="rounded-full border border-white/10 bg-white/5 px-4 py-2">runes state</span>
+                        <span class="rounded-full border border-white/10 bg-white/5 px-4 py-2">backdrop + ESC close</span>
+                        <span class="rounded-full border border-white/10 bg-white/5 px-4 py-2">mdsvex 埋め込み</span>
+                </div>
+        </div>
+
+        <DemoCard
+                eyebrow="live dialog"
+                title="シンプルなモーダル"
+                description="バックドロップクリックや ESC キーで閉じられるモーダル。内部のボタンは状態を更新します。"
+        >
+                <ModalDemo />
+        </DemoCard>
+
+        <DemoCard
+                eyebrow="mdsvex usage"
+                title="記事での呼び出し例"
+                description=".svx 内でのインポートと呼び出しをサンプルコードで確認できます。"
+        >
+                <CodePanel code={snippet} label="+page.svx" />
+        </DemoCard>
+</section>
